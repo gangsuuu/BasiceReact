@@ -60,3 +60,10 @@ a {
 .col-md-4 {
   text-align: center;
 }
+
+
+.nav-tabs {
+	display: flex;
+	justify-content:start;
+	gap:5px;
+}

@@ -15,14 +15,10 @@ function App() {
   let [shoes,setShoes] = useState(data)
   let navigate = useNavigate()
   let [page, setPage] = useState(1)
-
+  let [showBtn, setShowBtn] = useState(true)
   useEffect(() => {
-    setPage(page+1)
-
   },[])
-
-
-
+  
   return (
     <div className="App">
 
@@ -69,21 +65,23 @@ function App() {
               }
               </div>
               {
-                
+                showBtn == true ?
+                <button 
+                  onClick={()=>{
+                    axios.get(`https://codingapple1.github.io/shop/data${page+1}.json`)
+                    .then((results)=>{
+                      let copy = [ ...shoes, ...results.data]
+                      setShoes(copy)
+                      setPage(page+1)
+                    })
+                    .catch(()=>{
+                      alert('마지막 페이지입니다')
+                      setShowBtn(false)
+                    })
+                  }}
+                >더보기</button>
+                : null
               }
-              <button 
-              onClick={()=>{
-                axios.get(`https://codingapple1.github.io/shop/data${page}.json`)
-                .then((results)=>{
-                  let copy = [ ...shoes, ...results.data]
-                  setShoes(copy)
-                  setPage(page+1)
-                })
-                .catch(()=>{
-                  
-                })
-              }}
-              >더보기</button>
             </div>
           </>
         }/>
@@ -103,7 +101,7 @@ function App() {
           <Route path="two" element={<div>생일기념 쿠폰받기</div>}></Route>
         </Route>
 
-        <Route path="*" element={<div>없는페이지 입니다</div>} />
+        <Route path="*" element={<div>없는페이지 입니다</div>} />z
       </Routes>
 
       
