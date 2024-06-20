@@ -8,6 +8,8 @@ function Detail (props) {
     let [count, setCount] = useState(0)
     let [selectCount, setSelectCount] = useState(0)
     let [tabNum, setTabNum] = useState(0)
+    let [intro, setIntro] = useState('intro')
+
 
     let {id} = useParams()
     let item = props.shoes.find(function(x){
@@ -40,6 +42,12 @@ function Detail (props) {
         }
     },[selectCount])
 
+    useEffect(()=>{
+        setTimeout(()=>{ setIntro('load') },10)
+        return ()=> {
+            setIntro('intro')
+        }
+    },[])
 
     return  (
         <>
@@ -52,7 +60,7 @@ function Detail (props) {
                 }
              `}
             </style> */}
-            <div className="container">
+            <div className={"container intro "+intro+""}>
                 {/* <Alert alert={alert}>
                     <div className="alert alert-warning">
                         2초이내 구매시 할인
@@ -118,7 +126,23 @@ function TabContent({n}) {
     //         return (<div>내용2</div>)
     //         break;
     // }
-    return  [<div>내용0</div>,<div>내용1</div>,<div>내용2</div>][n]
+
+    let [fade, setFade] = useState('')
+    useEffect(()=>{
+        let a = setTimeout(() => {setFade('end')},100)
+        return () => {
+            clearTimeout(a)
+            setFade('')
+        }
+    },[n])
+
+    return (<div className={`start ${fade}`}>
+        {[
+            <div>내용0</div>,
+            <div>내용1</div>,
+            <div>내용2</div>
+        ][n]}
+    </div>)
 
 }
 

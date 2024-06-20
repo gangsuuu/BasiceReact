@@ -67,3 +67,22 @@ a {
 	justify-content:start;
 	gap:5px;
 }
+
+.start {
+	opacity: 0;
+
+}
+
+.end {
+	opacity: 1;
+	transition: opacity 0.5s;
+}
+
+.intro{
+	opacity: 0;
+}
+
+.load {
+	opacity: 1;
+	transition: opacity 0.5s;
+}
