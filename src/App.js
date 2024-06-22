@@ -2,13 +2,13 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import mainBg from './img/bg.png'
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import data from './data.js'
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom"
 import axios from 'axios'
 import Detail from './routes/Detail.js'
 import Event from './routes/Event.js' 
-
+import { Cart } from './routes/Cart.js' 
 
 function App() {
 
@@ -16,6 +16,7 @@ function App() {
   let navigate = useNavigate()
   let [page, setPage] = useState(1)
   let [showBtn, setShowBtn] = useState(true)
+
   useEffect(() => {
   },[])
   
@@ -86,6 +87,7 @@ function App() {
           </>
         }/>
         <Route path="/detail/:id" element={<Detail shoes={shoes}/>}/>
+
         <Route path="/about" element={<About/>} >
           <Route path="member" element={<div>멤버</div>} />
           <Route path="location" element={<div>회사위치</div>} />
@@ -101,7 +103,8 @@ function App() {
           <Route path="two" element={<div>생일기념 쿠폰받기</div>}></Route>
         </Route>
 
-        <Route path="*" element={<div>없는페이지 입니다</div>} />z
+        <Route path="*" element={<div>없는페이지 입니다</div>} />
+        <Route path="/cart" element={<Cart />}></Route>
       </Routes>
 
       

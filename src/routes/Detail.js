@@ -25,10 +25,6 @@ function Detail (props) {
     let Alert = styled.div`
         display : ${ props => props.alert}
     `
-    // const NewBtn = styled(YellowBtn)`
-    //     color: red;
-    //     display: none;
-    // `
 
     useEffect(()=> {
         // let a = setTimeout(() => setAlert("none"), 2000)
@@ -105,7 +101,7 @@ function Detail (props) {
                             >버튼2</Nav.Link>
                     </Nav.Item>
                 </Nav>
-                <TabContent n={tabNum}></TabContent>
+                <TabContent n={tabNum} shoes={props.shoes}></TabContent>
                
                 
 
@@ -114,7 +110,7 @@ function Detail (props) {
     )
 }
 
-function TabContent({n}) {
+function TabContent({n,shoes}) {
     // switch(props.n) {
     //     case 0 :
     //         return (<div>내용0</div>)
@@ -138,7 +134,7 @@ function TabContent({n}) {
 
     return (<div className={`start ${fade}`}>
         {[
-            <div>내용0</div>,
+            <div>{shoes[0].title}</div>,
             <div>내용1</div>,
             <div>내용2</div>
         ][n]}
