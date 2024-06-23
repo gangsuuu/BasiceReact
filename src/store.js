@@ -16,18 +16,24 @@ let items = createSlice({
       count.count += 1
     },
     addCart (state,action) {
-      state.push(action.payload)
-      // state.push({
-      //   name : action.payload.name,
-      //   id : action.payload.id,
-      //   count : action.payload.count,
-      // })
-      console.log(state[2].count)
+      let checkRepaet = state.find(value => value.id === action.payload.id)
+
+        if(!checkRepaet) {
+          state.push(action.payload)
+        } else {
+          checkRepaet.count = Number(action.payload.count) + Number(checkRepaet.count)
+        }
+    },
+    removeCart (state, action){
+
+      const newState =  state.filter((item) => item.id !== action.payload)
+
+      return newState
     }
   }
 })
 
-export let { addCount, addCart } = items.actions
+export let { addCount, addCart, removeCart } = items.actions
 
 
 export default configureStore({
