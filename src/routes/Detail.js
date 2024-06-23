@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import styled from 'styled-components'
+import { addCart } from "../store";
+import { useDispatch, useSelector } from "react-redux";
+
 
 function Detail (props) {
     let [alert, setAlert]  = useState('block')
@@ -9,6 +12,11 @@ function Detail (props) {
     let [selectCount, setSelectCount] = useState(0)
     let [tabNum, setTabNum] = useState(0)
     let [intro, setIntro] = useState('intro')
+
+
+    let dispatch = useDispatch()
+    // let state = useSelector((state) => state)
+    // let state = useSelector((state) => { return state})
 
 
     let {id} = useParams()
@@ -31,7 +39,6 @@ function Detail (props) {
         if (isNaN(selectCount) == true){
             window.alert('그러지마세요')
         }
-        
         return () => {
             <input onChange={ (e) => { setSelectCount(e.target.value) } } />
             // clearTimeout(a)
@@ -75,9 +82,22 @@ function Detail (props) {
                         <p>{item.price} 원</p>
                         <input 
                         style={{display:"block",marginBottom:'10px'}}
-                        onChange={(e)=>{setSelectCount(e.target.value)}}
+                        onChange={(e)=>{
+                            setSelectCount(e.target.value)
+                        }}
                         ></input>
-                        <button className="btn btn-danger">주문하기</button> 
+                        <button 
+                        className="btn btn-danger"
+                        onClick={
+                            () => {
+                                dispatch(addCart({
+                                    id: item.id, 
+                                    name: item.title, 
+                                    count: selectCount == 0 ? 1 : selectCount
+                                }))
+                            }
+                        }
+                        >주문하기</button> 
                     </div>
                 </div>
 
