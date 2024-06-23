@@ -36,11 +36,16 @@ function App() {
           <div>
             <Nav className="me-auto">
               <Nav.Link
+              onClick={() => {
+                navigate('/cart')
+              }}
+              >Cart</Nav.Link>
+              <Nav.Link
               onClick={() => {{navigate('/')}}}
               >Features</Nav.Link>
               <Nav.Link
               onClick={() => {
-                navigate("/detail")
+                navigate("/detail/1")
               }}>Detail</Nav.Link>
           </Nav>
           </div>
