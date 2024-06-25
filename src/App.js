@@ -12,6 +12,12 @@ import { Cart } from './routes/Cart.js'
 
 function App() {
 
+
+  let obj = {name : 'kim'}
+  localStorage.setItem('data', JSON.stringify(obj))
+  let localData = JSON.parse(localStorage.getItem('data'))
+  console.log(localData.name)
+
   let [shoes,setShoes] = useState(data)
   let navigate = useNavigate()
   let [page, setPage] = useState(1)

@@ -41,4 +41,4 @@ export default configureStore({
     items : items.reducer,
     user : user.reducer,
   }
-}) 
+})

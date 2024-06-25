@@ -47,6 +47,20 @@ function Detail (props) {
 
     useEffect(()=>{
         setTimeout(()=>{ setIntro('load') },10)
+
+        let watched = localStorage.getItem('watched')
+        if(watched){
+            watched = JSON.parse(watched)
+            watched.push(item.id)
+
+            const watched = new Set(watched);
+            watched = [...newBox]
+            watched.sort()
+            localStorage.setItem("watched",JSON.stringify(watched))
+        } else {
+            localStorage.setItem("watched",JSON.stringify([item.id]))
+        }
+
         return ()=> {
             setIntro('intro')
         }
